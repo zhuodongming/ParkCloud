@@ -11,9 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.App", "Park.App\Park.A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Rep", "Park.Rep\Park.Rep.csproj", "{42512BD9-A4D7-4A43-ADF1-AC5B02492A20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.Entity", "Park.Entity\Park.Entity.csproj", "{21400018-5F9D-4708-BC08-C5438F772A5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Entity", "Park.Entity\Park.Entity.csproj", "{21400018-5F9D-4708-BC08-C5438F772A5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.Service", "Park.Service\Park.Service.csproj", "{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Service", "Park.Service\Park.Service.csproj", "{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.ParkApi", "Park.ParkApi\Park.ParkApi.csproj", "{A3A11734-7954-48EA-B5E8-B51BF312D853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.AppApi", "Park.AppApi\Park.AppApi.csproj", "{30771977-C4CB-41C0-9813-1B8913C791C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{BCD015EB-BB87-4A26-AD79-F55EE377AF91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,12 +51,24 @@ Global
 		{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A11734-7954-48EA-B5E8-B51BF312D853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A11734-7954-48EA-B5E8-B51BF312D853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A11734-7954-48EA-B5E8-B51BF312D853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A11734-7954-48EA-B5E8-B51BF312D853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30771977-C4CB-41C0-9813-1B8913C791C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30771977-C4CB-41C0-9813-1B8913C791C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30771977-C4CB-41C0-9813-1B8913C791C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30771977-C4CB-41C0-9813-1B8913C791C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3A11734-7954-48EA-B5E8-B51BF312D853} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
+		{30771977-C4CB-41C0-9813-1B8913C791C2} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {DEBDD52B-9B43-4BED-B76D-07F9E82078C7}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal
