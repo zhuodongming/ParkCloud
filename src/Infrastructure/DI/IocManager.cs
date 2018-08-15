@@ -80,7 +80,7 @@ namespace Infrastructure.DI
         {
             if (provider == null)
             {
-                throw new Exception("IocManager no Init");
+                throw new Exception("IocManager is not Init");
             }
             return provider.GetRequiredService<T>();
         }
