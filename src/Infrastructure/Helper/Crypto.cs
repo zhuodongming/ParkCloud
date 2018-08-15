@@ -16,14 +16,9 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static string GetMD5(string content, Encoding encode = null)
+        public static string GetMD5(string content)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
-
-            byte[] bytes_in = encode.GetBytes(content);
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
             using (MD5 md5 = MD5.Create())
             {
                 byte[] bytes_out = md5.ComputeHash(bytes_in);
@@ -67,14 +62,9 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static string GetSHA1(string content, Encoding encode = null)
+        public static string GetSHA1(string content)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
-
-            byte[] bytes_in = encode.GetBytes(content);
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
             using (SHA1 sha1 = SHA1.Create())
             {
                 byte[] bytes_out = sha1.ComputeHash(bytes_in);
@@ -93,7 +83,7 @@ namespace Infrastructure.Helper
             using (HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(key)))
             {
                 byte[] bytes_out = hmacsha1.ComputeHash(bytes_in);
-                return Convert.ToBase64String(bytes_out);
+                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
             }
         }
 
@@ -102,18 +92,28 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static string GetSHA256(string content, Encoding encode = null)
+        public static string GetSHA256(string content)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
-
-            byte[] bytes_in = encode.GetBytes(content);
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] bytes_out = sha256.ComputeHash(bytes_in);
-                return Convert.ToBase64String(bytes_out);
+                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
+            }
+        }
+
+        /// <summary>
+        /// 获取HMACSHA256签名
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static string GetHMACSHA256(string content, string key)
+        {
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
+            using (HMACSHA256 hmacsha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+            {
+                byte[] bytes_out = hmacsha256.ComputeHash(bytes_in);
+                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
             }
         }
 
@@ -122,20 +122,29 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        public static string GetSHA512(string content, Encoding encode = null)
+        public static string GetSHA512(string content)
         {
-            if (encode == null)
-            {
-                encode = Encoding.UTF8;
-            }
-
-            byte[] bytes_in = encode.GetBytes(content);
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
             using (SHA512 sha512 = SHA512.Create())
             {
                 byte[] bytes_out = sha512.ComputeHash(bytes_in);
-                return Convert.ToBase64String(bytes_out);
+                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
             }
         }
 
+        /// <summary>
+        /// 获取HMACSHA512签名
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public static string GetHMACSHA512(string content, string key)
+        {
+            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
+            using (HMACSHA512 hmacsha512 = new HMACSHA512(Encoding.UTF8.GetBytes(key)))
+            {
+                byte[] bytes_out = hmacsha512.ComputeHash(bytes_in);
+                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
+            }
+        }
     }
 }
