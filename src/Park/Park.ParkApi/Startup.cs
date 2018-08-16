@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Infrastructure.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,8 @@ namespace Park.ParkApi
                 options.Filters.Add<ValidateModelAttribute>(2);
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services
             .Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));

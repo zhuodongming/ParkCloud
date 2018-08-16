@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Infrastructure.DI;
+using Microsoft.AspNetCore.Mvc;
+using Park.App;
 using Park.Dto;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,8 @@ namespace Park.ParkApi.Controllers
     [Route("park/[controller]")]
     public class ExitController : ControllerBase
     {
+        ExitApp _exitApp = IocManager.GetRequiredService<ExitApp>();
+
         [HttpGet]
         public void Get()
         {
@@ -23,9 +27,9 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] ExitDto dto)
+        public Task Post([FromBody] ExitDto dto)
         {
-
+            return _exitApp.Exit(dto);
         }
 
         [HttpPost]

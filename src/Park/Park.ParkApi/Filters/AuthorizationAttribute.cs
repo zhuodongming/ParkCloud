@@ -52,8 +52,8 @@ namespace Park.ParkApi.Filters
                         string sign = Crypto.GetHMACSHA256(preSignstring, parkEntity.park_key);
                         if (sign == signingRequest)
                         {
-                            context.HttpContext.Items.Add("parkID", parkID);
-
+                            context.HttpContext.Items.Add("ParkUser", parkEntity);
+                            return;
                         }
                     }
                 }
