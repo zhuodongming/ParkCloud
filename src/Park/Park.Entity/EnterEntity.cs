@@ -7,7 +7,7 @@ namespace Park.Entity
 {
     [TableName("enter")]
     [PrimaryKey("id", AutoIncrement = false)]
-    public class EnterModel
+    public class EnterEntity
     {
         public long id { get; set; }//id
         public string req_id { get; set; }//请求id

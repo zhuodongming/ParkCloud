@@ -42,14 +42,14 @@ namespace Park.ParkApi.Filters
                 {
                     string parkID = split[0];
                     string signingRequest = split[1];
-                    ParkModel parkModel = await _parkRep.SingleOrDefaultByIdAsync(parkID);
-                    if (parkModel != null)
+                    ParkEntity parkEntity = await _parkRep.SingleOrDefaultByIdAsync(parkID);
+                    if (parkEntity != null)
                     {
                         string preSignstring = method + "\n"
                                             + contentMD5 + "\n"
                                             + date + "\n"
                                             + rawUrl + "\n";
-                        string sign = Crypto.GetHMACSHA1(preSignstring, parkModel.park_key);
+                        string sign = Crypto.GetHMACSHA256(preSignstring, parkEntity.park_key);
                         if (sign == signingRequest)
                         {
                             context.HttpContext.Items.Add("parkID", parkID);

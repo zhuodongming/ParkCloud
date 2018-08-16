@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Park.Rep
 {
-    public class ApplicationRep : BaseRepository<ApplicationEntity>
+    public class EnterRep : ParkRepository<EnterEntity>
     {
     }
 }

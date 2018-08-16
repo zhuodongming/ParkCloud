@@ -7,7 +7,7 @@ namespace Park.Entity
 {
     [TableName("application")]
     [PrimaryKey("app_id", AutoIncrement = false)]
-    public class ApplicationModel
+    public class ApplicationEntity
     {
         public string app_id { get; set; }//id
         public string app_key { get; set; }//key

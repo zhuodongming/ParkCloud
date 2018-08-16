@@ -7,7 +7,7 @@ namespace Park.Entity
 {
     [TableName("exit")]
     [PrimaryKey("id", AutoIncrement = false)]
-    public class ExitModel
+    public class ExitEntity
     {
         public long id { get; set; }//id
         public string req_id { get; set; }//请求id

@@ -7,7 +7,7 @@ namespace Park.Entity
 {
     [TableName("park")]
     [PrimaryKey("park_id", AutoIncrement = false)]
-    public class ParkModel
+    public class ParkEntity
     {
         public string park_id { get; set; }//车场id
         public string park_key { get; set; }//车场key
