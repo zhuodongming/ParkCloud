@@ -18,12 +18,16 @@ namespace Park.App
 
         public async Task Exit(ExitDto dto)
         {
+            /* 1.是否在场
+             * 2.是否在保通行证
+             * 3.算费,是否免费期内
+             * 4.是否已经缴费
+             */
+
             EnterEntity enterEntity = await _enterRep.FirstOrDefaultAsync($"where plate_no='{dto.PlateNo}'");
             if (enterEntity != null)
             {
                 //算费服务
-
-
                 var exitEntity = new ExitEntity
                 {
                     id = new IdWorker(1, 1).NextId(),
