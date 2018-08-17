@@ -27,13 +27,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task Post([FromBody] ExitDto dto)
+        public Task<ExitRespDto> Post([FromBody] ExitReqDto dto)
         {
             return _exitApp.Exit(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] ExitDto dto)
+        public void Record([FromBody] ExitReqDto dto)
         {
         }
     }

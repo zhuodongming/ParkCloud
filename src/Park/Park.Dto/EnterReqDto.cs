@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Park.Dto
 {
-    public class EnterDto
+    public class EnterReqDto
     {
         public string ReqID { get; set; }//请求ID
         public string PlateNo { get; set; }//车牌号码

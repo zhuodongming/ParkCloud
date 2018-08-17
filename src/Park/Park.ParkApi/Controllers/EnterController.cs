@@ -27,13 +27,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task Post([FromBody] EnterDto dto)
+        public Task Post([FromBody] EnterReqDto dto)
         {
             return _enterApp.Enter(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] EnterDto dto)
+        public void Record([FromBody] EnterReqDto dto)
         {
         }
     }

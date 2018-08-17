@@ -15,7 +15,7 @@ namespace Park.App
     {
         EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
 
-        public Task Enter(EnterDto dto)
+        public Task Enter(EnterReqDto dto)
         {
             ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
             var entity = new EnterEntity

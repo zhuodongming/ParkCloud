@@ -16,7 +16,7 @@ namespace Park.App
         EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
         ExitRep _exitRep = IocManager.GetRequiredService<ExitRep>();
 
-        public async Task Exit(ExitDto dto)
+        public async Task<ExitRespDto> Exit(ExitReqDto dto)
         {
             /* 1.是否在场
              * 2.是否在保通行证
@@ -52,6 +52,8 @@ namespace Park.App
                 };
                 await _exitRep.InsertAsync(exitEntity);
             }
+
+            return null;
         }
     }
 }
