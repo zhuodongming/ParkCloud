@@ -40,8 +40,7 @@ namespace Park.ParkApi
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services
-            .Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
 
             IocManager.Init(services);
         }

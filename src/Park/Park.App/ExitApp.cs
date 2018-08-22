@@ -13,6 +13,8 @@ namespace Park.App
     [Scoped]
     public class ExitApp
     {
+        BlacklistRep _blacklistRep = IocManager.GetRequiredService<BlacklistRep>();
+        PassportRep _passportRep = IocManager.GetRequiredService<PassportRep>();
         EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
         ExitRep _exitRep = IocManager.GetRequiredService<ExitRep>();
 
@@ -24,7 +26,38 @@ namespace Park.App
              * 4.是否已经缴费
              */
 
-            EnterEntity enterEntity = await _enterRep.FirstOrDefaultAsync($"where plate_no='{dto.PlateNo}'");
+            var respDto = new ExitRespDto();
+            ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
+
+            //黑名单信息
+            BlacklistEntity blacklistEntity = await _blacklistRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            if (blacklistEntity != null)
+            {
+                DateTime now = DateTime.Now;
+                if (blacklistEntity.effective_time < now && now < blacklistEntity.expiry_time)
+                {
+                    respDto.IsBlacklist = true;
+                    respDto.EffectiveTime = blacklistEntity.effective_time;
+                    respDto.ExpiryTime = blacklistEntity.expiry_time;
+                    return respDto;
+                }
+            }
+
+            //通行证信息
+            PassportEntity passportEntity = await _passportRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            if (passportEntity != null)
+            {
+                DateTime now = DateTime.Now;
+                if (passportEntity.effective_time < now && now < passportEntity.expiry_time)
+                {
+                    respDto.IsPassPort = true;
+                    respDto.EffectiveTime = passportEntity.effective_time;
+                    respDto.ExpiryTime = passportEntity.expiry_time;
+                    return respDto;
+                }
+            }
+
+            EnterEntity enterEntity = await _enterRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
             if (enterEntity != null)
             {
                 //算费服务

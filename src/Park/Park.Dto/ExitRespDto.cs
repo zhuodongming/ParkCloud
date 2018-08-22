@@ -7,7 +7,9 @@ namespace Park.Dto
     public class ExitRespDto
     {
         public bool IsPassPort { get; set; }//是否是通行证
-        public DateTime EffectiveDate { get; set; }//生效日期
-        public DateTime ExpiryDate { get; set; }//失效日期
+        public bool IsBlacklist { get; set; }//是否黑名单
+        public DateTime EffectiveTime { get; set; }//生效时间
+        public DateTime ExpiryTime { get; set; }//失效时间
+        public string remark { get; set; }//备注
     }
 }
