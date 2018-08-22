@@ -20,7 +20,11 @@ namespace Park.App
 
         public async Task<ExitRespDto> Exit(ExitReqDto dto)
         {
-            /* 1.是否在场
+            /* 通行证检查
+             * 黑名单检查
+             * 
+             * 算费
+             * 1.是否在场
              * 2.是否在保通行证
              * 3.算费,是否免费期内
              * 4.是否已经缴费
@@ -29,7 +33,21 @@ namespace Park.App
             var respDto = new ExitRespDto();
             ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
 
-            //黑名单信息
+            //通行证检查
+            PassportEntity passportEntity = await _passportRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            if (passportEntity != null)
+            {
+                DateTime now = DateTime.Now;
+                if (passportEntity.effective_time < now && now < passportEntity.expiry_time)
+                {
+                    respDto.IsPassport = true;
+                    respDto.EffectiveTime = passportEntity.effective_time;
+                    respDto.ExpiryTime = passportEntity.expiry_time;
+                    return respDto;
+                }
+            }
+
+            //黑名单检查
             BlacklistEntity blacklistEntity = await _blacklistRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
             if (blacklistEntity != null)
             {
@@ -39,20 +57,6 @@ namespace Park.App
                     respDto.IsBlacklist = true;
                     respDto.EffectiveTime = blacklistEntity.effective_time;
                     respDto.ExpiryTime = blacklistEntity.expiry_time;
-                    return respDto;
-                }
-            }
-
-            //通行证信息
-            PassportEntity passportEntity = await _passportRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
-            if (passportEntity != null)
-            {
-                DateTime now = DateTime.Now;
-                if (passportEntity.effective_time < now && now < passportEntity.expiry_time)
-                {
-                    respDto.IsPassPort = true;
-                    respDto.EffectiveTime = passportEntity.effective_time;
-                    respDto.ExpiryTime = passportEntity.expiry_time;
                     return respDto;
                 }
             }
