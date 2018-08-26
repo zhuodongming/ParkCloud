@@ -25,10 +25,7 @@ namespace Infrastructure.Helper
                 AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
                 ServerCertificateCustomValidationCallback = ServerCertificateCustomValidation,//设置访问https url
             };
-
-            httpClient = new HttpClient(hander);
-            //httpClient.Timeout = TimeSpan.FromSeconds(10);//超时设置
-            //httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");//保持链接
+            httpClient = HttpClientFactory.Create(hander);
         }
 
         private static bool ServerCertificateCustomValidation(HttpRequestMessage sender, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;
