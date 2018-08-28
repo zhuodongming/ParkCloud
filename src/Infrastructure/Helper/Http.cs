@@ -16,19 +16,11 @@ namespace Infrastructure.Helper
     /// </summary>
     public sealed class Http
     {
-        private static readonly HttpClient httpClient = null;
-        static Http()
+        private static HttpClientHandler hander = new HttpClientHandler()
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            HttpClientHandler hander = new HttpClientHandler()
-            {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
-                ServerCertificateCustomValidationCallback = ServerCertificateCustomValidation,//设置访问https url
-            };
-            httpClient = HttpClientFactory.Create(hander);
-        }
-
-        private static bool ServerCertificateCustomValidation(HttpRequestMessage sender, X509Certificate2 certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true;
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
+            ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,//设置访问https url
+        };
 
         public async static Task<string> GetStringAsync(string url, IDictionary<string, string> headers = null)
         {
@@ -40,7 +32,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     return await response.Content.ReadAsStringAsync();
                 }
@@ -57,7 +49,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     return await response.Content.ReadAsByteArrayAsync();
                 }
@@ -74,7 +66,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
@@ -94,7 +86,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
@@ -114,7 +106,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
@@ -134,7 +126,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
@@ -168,7 +160,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
@@ -186,7 +178,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     return await response.Content.ReadAsStringAsync();
                 }
@@ -205,7 +197,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
