@@ -34,6 +34,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
                 }
             }
@@ -51,6 +52,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsByteArrayAsync();
                 }
             }
@@ -68,6 +70,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
@@ -88,6 +91,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
@@ -108,6 +112,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
@@ -128,13 +133,14 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
             }
         }
 
-        public async static Task<T> PostMultipartFormDataAsync<T>(string url, IDictionary<string, FileInfo> dicFiles, IDictionary<string, string> dicForm = null, IDictionary<string, string> headers = null)
+        public async static Task<T> PostMultipartFormDataAsync<T>(string url, IDictionary<string, FileSimpleInfo> dicFiles, IDictionary<string, string> dicForm = null, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             using (MultipartFormDataContent content = new MultipartFormDataContent())
@@ -148,8 +154,7 @@ namespace Infrastructure.Helper
                 //添加多文件内容
                 dicFiles.ToList().ForEach(item =>
                 {
-                    ByteArrayContent bc = new ByteArrayContent(File.ReadAllBytes(item.Value.FullName));
-                    content.Add(bc, item.Key, item.Value.Name);
+                    content.Add(new ByteArrayContent(item.Value.Content), item.Key, item.Value.FileName);
                 });
 
                 request.Content = content;
@@ -162,6 +167,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
@@ -180,6 +186,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
                 }
             }
@@ -199,6 +206,7 @@ namespace Infrastructure.Helper
 
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
+                    response.EnsureSuccessStatusCode();
                     string strResult = await response.Content.ReadAsStringAsync();
                     return Json.ToObject<T>(strResult);
                 }
