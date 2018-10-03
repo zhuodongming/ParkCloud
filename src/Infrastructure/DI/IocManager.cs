@@ -11,7 +11,7 @@ namespace Infrastructure.DI
     /// <summary>
     /// Container manager
     /// </summary>
-    public class IocManager
+    public sealed class IocManager
     {
         private static ServiceProvider provider;
 

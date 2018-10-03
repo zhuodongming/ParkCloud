@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Infrastructure.Helper
 {
-    public static class Xml
+    public sealed class Xml
     {
         //序列化对象
         public static string Serialize<T>(T model)

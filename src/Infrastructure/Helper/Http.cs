@@ -58,47 +58,7 @@ namespace Infrastructure.Helper
             }
         }
 
-        public async static Task<T> GetObjectAsync<T>(string url, IDictionary<string, string> headers = null)
-        {
-            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url))
-            {
-                //添加http请求头
-                headers?.ToList().ForEach(item =>
-                {
-                    request.Headers.Add(item.Key, item.Value);
-                });
-
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
-                {
-                    response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
-                }
-            }
-        }
-
-        public async static Task<T> PostStringAsync<T>(string url, string postData, IDictionary<string, string> headers = null)
-        {
-            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
-            {
-                request.Content = new StringContent(postData, Encoding.UTF8);
-
-                //添加http请求头
-                headers?.ToList().ForEach(item =>
-                {
-                    request.Headers.Add(item.Key, item.Value);
-                });
-
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
-                {
-                    response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
-                }
-            }
-        }
-
-        public async static Task<T> PostFromAsync<T>(string url, IDictionary<string, string> dicForm, IDictionary<string, string> headers = null)
+        public async static Task<string> PostFromAsync(string url, IDictionary<string, string> dicForm, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             {
@@ -113,17 +73,16 @@ namespace Infrastructure.Helper
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
+                    return await response.Content.ReadAsStringAsync();
                 }
             }
         }
 
-        public async static Task<T> PostJsonAsync<T>(string url, object postModel, IDictionary<string, string> headers = null)
+        public async static Task<string> PostJsonAsync(string url, string content, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             {
-                request.Content = new StringContent(Json.ToJson(postModel), Encoding.UTF8, "application/json");
+                request.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
                 //添加http请求头
                 headers?.ToList().ForEach(item =>
@@ -134,22 +93,18 @@ namespace Infrastructure.Helper
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
+                    return await response.Content.ReadAsStringAsync();
                 }
             }
         }
 
-        public async static Task<T> PostMultipartFormDataAsync<T>(string url, IDictionary<string, FileSimpleInfo> dicFiles, IDictionary<string, string> dicForm = null, IDictionary<string, string> headers = null)
+        public async static Task<string> PostMultipartFormDataAsync(string url, IDictionary<string, string> dicForm, IDictionary<string, FileSimpleInfo> dicFiles, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             using (MultipartFormDataContent content = new MultipartFormDataContent())
             {
                 //添加表单内容
-                dicForm?.ToList().ForEach(item =>
-                {
-                    content.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(item.Value)), item.Key);
-                });
+                content.Add(new FormUrlEncodedContent(dicForm));
 
                 //添加多文件内容
                 dicFiles.ToList().ForEach(item =>
@@ -168,8 +123,27 @@ namespace Infrastructure.Helper
                 using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        public async static Task<string> PutJsonAsync(string url, string content, IDictionary<string, string> headers = null)
+        {
+            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url))
+            {
+                request.Content = new StringContent(content, Encoding.UTF8, "application/json");
+
+                //添加http请求头
+                headers?.ToList().ForEach(item =>
+                {
+                    request.Headers.Add(item.Key, item.Value);
+                });
+
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsStringAsync();
                 }
             }
         }
@@ -188,27 +162,6 @@ namespace Infrastructure.Helper
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
-                }
-            }
-        }
-
-        public async static Task<T> PutJsonAsync<T>(string url, object postModel, IDictionary<string, string> headers = null)
-        {
-            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url))
-            {
-                request.Content = new StringContent(Json.ToJson(postModel), Encoding.UTF8, "application/json");
-
-                //添加http请求头
-                headers?.ToList().ForEach(item =>
-                {
-                    request.Headers.Add(item.Key, item.Value);
-                });
-
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
-                {
-                    response.EnsureSuccessStatusCode();
-                    string strResult = await response.Content.ReadAsStringAsync();
-                    return Json.ToObject<T>(strResult);
                 }
             }
         }
