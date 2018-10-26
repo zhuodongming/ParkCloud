@@ -15,9 +15,9 @@ namespace Infrastructure.Helper
         /// 获取秒级时间戳
         /// </summary>
         /// <returns></returns>
-        public static int GetTimestamp()
+        public static long GetTimestamp()
         {
-            return (int)DateTimeOffset.Now.ToUnixTimeSeconds();
+            return DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Infrastructure.Helper
         /// <returns></returns>
         public static long GetTimestampByMS()
         {
-            return DateTimeOffset.Now.ToUnixTimeMilliseconds();
+            return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
         /// <summary>

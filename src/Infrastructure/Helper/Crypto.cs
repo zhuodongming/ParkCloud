@@ -9,7 +9,7 @@ namespace Infrastructure.Helper
     /// <summary>
     /// 加解密 Helper
     /// </summary>
-    public sealed partial class Crypto
+    public sealed class Crypto
     {
         /// <summary>
         /// 获取md5签名
@@ -103,21 +103,6 @@ namespace Infrastructure.Helper
         }
 
         /// <summary>
-        /// 获取HMACSHA256签名
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        public static string GetHMACSHA256(string content, string key)
-        {
-            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
-            using (HMACSHA256 hmacsha256 = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
-            {
-                byte[] bytes_out = hmacsha256.ComputeHash(bytes_in);
-                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
-            }
-        }
-
-        /// <summary>
         /// 获取sha512签名
         /// </summary>
         /// <param name="content"></param>
@@ -128,21 +113,6 @@ namespace Infrastructure.Helper
             using (SHA512 sha512 = SHA512.Create())
             {
                 byte[] bytes_out = sha512.ComputeHash(bytes_in);
-                return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
-            }
-        }
-
-        /// <summary>
-        /// 获取HMACSHA512签名
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        public static string GetHMACSHA512(string content, string key)
-        {
-            byte[] bytes_in = Encoding.UTF8.GetBytes(content);
-            using (HMACSHA512 hmacsha512 = new HMACSHA512(Encoding.UTF8.GetBytes(key)))
-            {
-                byte[] bytes_out = hmacsha512.ComputeHash(bytes_in);
                 return BitConverter.ToString(bytes_out).Replace("-", "").ToLower();
             }
         }

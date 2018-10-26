@@ -7,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace Infrastructure.Helper
 {
+    /// <summary>
+    /// Xml Helper
+    /// </summary>
     public sealed class Xml
     {
         //序列化对象

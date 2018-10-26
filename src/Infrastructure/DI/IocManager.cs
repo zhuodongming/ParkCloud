@@ -25,7 +25,7 @@ namespace Infrastructure.DI
 
             //所有程序集 和程序集下类型
             List<TypeInfo> allTypes = new List<TypeInfo>();
-            List<CompilationLibrary> libs = DependencyContext.Default.CompileLibraries.Where(lib => !lib.Serviceable && lib.Type != "package").ToList();//排除所有的系统程序集、Nuget下载包
+            List<CompilationLibrary> libs = DependencyContext.Default.CompileLibraries.Where(lib => lib.Type == "project").ToList();//排除所有的系统程序集、Nuget下载包
             libs.ForEach(lib =>
             {
                 Assembly assembly = Assembly.Load(new AssemblyName(lib.Name));

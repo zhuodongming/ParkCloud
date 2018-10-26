@@ -78,11 +78,11 @@ namespace Infrastructure.Helper
             }
         }
 
-        public async static Task<string> PostJsonAsync(string url, string content, IDictionary<string, string> headers = null)
+        public async static Task<string> PostJsonAsync(string url, string json, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             {
-                request.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 //添加http请求头
                 headers?.ToList().ForEach(item =>
@@ -128,11 +128,11 @@ namespace Infrastructure.Helper
             }
         }
 
-        public async static Task<string> PutJsonAsync(string url, string content, IDictionary<string, string> headers = null)
+        public async static Task<string> PutJsonAsync(string url, string json, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Put, url))
             {
-                request.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 //添加http请求头
                 headers?.ToList().ForEach(item =>
