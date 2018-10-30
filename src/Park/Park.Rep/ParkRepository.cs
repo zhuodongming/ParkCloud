@@ -14,7 +14,7 @@ namespace Park.Rep
         public ParkRepository()
         {
             var options = IocManager.GetRequiredService<IOptions<ConnectionStrings>>();
-            db = new Database(options.Value.Park, DatabaseType.MySQL, MySqlClientFactory.Instance);
+            db = new NPocoDatabase(options.Value.Park, DatabaseType.MySQL, MySqlClientFactory.Instance);
         }
     }
 }

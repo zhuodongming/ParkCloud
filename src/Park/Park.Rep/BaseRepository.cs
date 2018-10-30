@@ -8,7 +8,7 @@ namespace Park.Rep
 {
     public abstract class BaseRepository<T> where T : class, new()
     {
-        protected Database db = null;
+        protected NPocoDatabase db = null;
 
         #region 增删改查
 
