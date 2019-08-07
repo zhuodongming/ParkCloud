@@ -18,8 +18,8 @@ namespace Park.ParkApi.Filters
             message.Append("Unhandled exception:" + Environment.NewLine);
             message.Append("Method: " + request.Method + Environment.NewLine);
             message.Append("URI: " + request.Scheme + "://" + request.Host.Value + request.Path.Value + request.QueryString.Value + Environment.NewLine);
-            message.Append("Headers: " + Json.ToString(request.Headers) + Environment.NewLine);
-            message.Append("RouteData: " + Json.ToString(context.RouteData.Values) + Environment.NewLine);
+            message.Append("Headers: " + request.Headers.ToJson() + Environment.NewLine);
+            message.Append("RouteData: " + context.RouteData.Values.ToJson() + Environment.NewLine);
 
             using (StreamReader sr = new StreamReader(request.Body))
             {

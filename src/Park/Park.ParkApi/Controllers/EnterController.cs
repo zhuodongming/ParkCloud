@@ -12,7 +12,7 @@ namespace Park.ParkApi.Controllers
     [Route("park/[controller]")]
     public class EnterController : ControllerBase
     {
-        EnterApp _enterApp = IocManager.GetRequiredService<EnterApp>();
+        EnterApp _enterApp = new EnterApp();
 
         [HttpGet]
         public void Get()

@@ -16,11 +16,11 @@ namespace Park.ParkApi.Middleware
         private readonly RequestDelegate _next;
         //private WSHandler _wsHandler;
 
-        //public ChannelWSMiddleware(RequestDelegate next, WSHandler wsHandler)
-        //{
-        //    this._next = next;
-        //    this._wsHandler = wsHandler;
-        //}
+        public ChannelWSMiddleware(RequestDelegate next)//, WSHandler wsHandler
+        {
+            this._next = next;
+            //this._wsHandler = wsHandler;
+        }
 
         public async Task Invoke(HttpContext httpContext)
         {

@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using Infrastructure.Helper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure.Helper
+namespace System
 {
     /// <summary>
-    /// Json Helper
+    /// Json 扩展方法
     /// </summary>
-    public sealed class Json
+    public static class JsonExtensions
     {
         /// <summary>
         /// 转换为json字符串
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToString(object obj)
+        public static string ToJson(this object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }
@@ -25,8 +26,8 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="json"></param>
-        /// <returns>T</returns>
-        public static T ToObject<T>(string json)
+        /// <returns></returns>
+        public static T ToObject<T>(this string json)
         {
             try
             {

@@ -12,7 +12,7 @@ namespace Park.ParkApi.Controllers
     [Route("park/[controller]")]
     public class ExitController : ControllerBase
     {
-        ExitApp _exitApp = IocManager.GetRequiredService<ExitApp>();
+        ExitApp _exitApp = new ExitApp();
 
         [HttpGet]
         public void Get()

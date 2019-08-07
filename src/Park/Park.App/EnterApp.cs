@@ -12,7 +12,7 @@ namespace Park.App
 {
     public class EnterApp
     {
-        EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
+        EnterRep _enterRep = new EnterRep();
 
         public Task Enter(EnterReqDto dto)
         {

@@ -35,8 +35,8 @@ namespace Park.ParkApi.Middleware
             StringBuilder message = new StringBuilder(4 * 1024);
             message.Append("Method: " + request.Method + Environment.NewLine);
             message.Append("URI: " + request.Scheme + "://" + request.Host.Value + request.Path.Value + request.QueryString.Value + Environment.NewLine);
-            message.Append("Headers: " + Json.ToJson(request.Headers) + Environment.NewLine);
-            message.Append("RouteData: " + Json.ToJson(httpContext.Request.Path) + Environment.NewLine);
+            message.Append("Headers: " + request.Headers.ToJson() + Environment.NewLine);
+            message.Append("RouteData: " + httpContext.Request.Path.ToJson() + Environment.NewLine);
 
             using (StreamReader sr = new StreamReader(request.Body))
             {

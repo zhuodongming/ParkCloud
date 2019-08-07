@@ -12,10 +12,10 @@ namespace Park.App
 {
     public class ExitApp
     {
-        BlacklistRep _blacklistRep = IocManager.GetRequiredService<BlacklistRep>();
-        PassportRep _passportRep = IocManager.GetRequiredService<PassportRep>();
-        EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
-        ExitRep _exitRep = IocManager.GetRequiredService<ExitRep>();
+        BlacklistRep _blacklistRep = new BlacklistRep();
+        PassportRep _passportRep = new PassportRep();
+        EnterRep _enterRep = new EnterRep();
+        ExitRep _exitRep = new ExitRep();
 
         public async Task<ExitRespDto> Exit(ExitReqDto dto)
         {

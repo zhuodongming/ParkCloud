@@ -30,7 +30,7 @@ namespace Park.ParkApi.Middleware
             stopwatch.Stop();
             if (stopwatch.ElapsedMilliseconds > 100)
             {
-                string message = $"RouteData:{Json.ToJson(httpContext.Request.Path.ToString())} execute time greater than 100 milliseconds";
+                string message = $"RouteData:{httpContext.Request.Path.ToString()} execute time greater than 100 milliseconds";
                 Log.Warn(message);
             }
         }
