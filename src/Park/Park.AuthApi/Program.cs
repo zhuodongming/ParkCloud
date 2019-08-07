@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Park.ParkApi
+namespace Park.AuthApi
 {
     public class Program
     {

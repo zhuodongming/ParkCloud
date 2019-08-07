@@ -17,7 +17,7 @@ namespace Infrastructure.Helper
         {
             using (MemoryStream stream = new MemoryStream())
             {
-                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, Encoding = Encoding.UTF8 };
+                XmlWriterSettings settings = new XmlWriterSettings { Indent = true, Encoding = new UTF8Encoding(false) };
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
                     // 强制指定命名空间，覆盖默认的命名空间  

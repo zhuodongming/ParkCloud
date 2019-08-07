@@ -6,7 +6,6 @@ using System.Text;
 
 namespace Park.Rep
 {
-    [Scoped]
     public class BlacklistRep : BaseRepository<BlacklistEntity>
     {
     }

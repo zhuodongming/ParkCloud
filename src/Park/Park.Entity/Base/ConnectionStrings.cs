@@ -9,6 +9,6 @@ namespace Park.Entity.Base
     /// </summary>
     public class ConnectionStrings
     {
-        public string Park { get; set; }//停车场库
+        public static string Park { get; set; }//停车场库
     }
 }

@@ -34,9 +34,9 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="time"></param>
         /// <returns></returns>
-        public static int ToTimestamp(DateTime time)
+        public static long ToTimestamp(DateTime time)
         {
-            return (int)(time.ToUniversalTime() - Jan1st1970).TotalSeconds;
+            return (long)(time.ToUniversalTime() - Jan1st1970).TotalSeconds;
         }
 
         /// <summary>

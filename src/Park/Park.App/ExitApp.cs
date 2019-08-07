@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Park.App
 {
-    [Scoped]
     public class ExitApp
     {
         BlacklistRep _blacklistRep = IocManager.GetRequiredService<BlacklistRep>();

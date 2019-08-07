@@ -15,7 +15,7 @@ namespace Infrastructure.Helper
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToJson(object obj)
+        public static string ToString(object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }

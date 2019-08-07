@@ -16,8 +16,9 @@ namespace Infrastructure.Helper
     /// </summary>
     public sealed class Http
     {
-        private static HttpClientHandler hander = new HttpClientHandler()
+        private static readonly HttpClientHandler hander = new HttpClientHandler()
         {
+            UseProxy = false,//禁用代理
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
             ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,//设置访问https url
         };
@@ -98,13 +99,36 @@ namespace Infrastructure.Helper
             }
         }
 
+        public async static Task<byte[]> PostJsonAsByteArrayAsync(string url, string json, IDictionary<string, string> headers = null)
+        {
+            using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
+            {
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                //添加http请求头
+                headers?.ToList().ForEach(item =>
+                {
+                    request.Headers.Add(item.Key, item.Value);
+                });
+
+                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    return await response.Content.ReadAsByteArrayAsync();
+                }
+            }
+        }
+
         public async static Task<string> PostMultipartFormDataAsync(string url, IDictionary<string, string> dicForm, IDictionary<string, FileSimpleInfo> dicFiles, IDictionary<string, string> headers = null)
         {
             using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url))
             using (MultipartFormDataContent content = new MultipartFormDataContent())
             {
                 //添加表单内容
-                content.Add(new FormUrlEncodedContent(dicForm));
+                dicForm.ToList().ForEach(item =>
+                {
+                    content.Add(new ByteArrayContent(Encoding.UTF8.GetBytes(item.Value)), item.Key);
+                });
 
                 //添加多文件内容
                 dicFiles.ToList().ForEach(item =>

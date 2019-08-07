@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace Park.App
 {
-    [Scoped]
     public class EnterApp
     {
         EnterRep _enterRep = IocManager.GetRequiredService<EnterRep>();
@@ -18,7 +17,7 @@ namespace Park.App
         public Task Enter(EnterReqDto dto)
         {
             ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
-            
+
             var entity = new EnterEntity
             {
                 id = new IdWorker(1, 1).NextId(),

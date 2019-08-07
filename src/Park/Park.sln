@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{FEE18AC1-6CA8-4618-ADBA-9DDB546AAA44}"
 EndProject
@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Entity", "Park.Entity\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Service", "Park.Service\Park.Service.csproj", "{6C0A8C6F-20A1-4FAE-9A12-BDB24788C08E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.ParkApi", "Park.ParkApi\Park.ParkApi.csproj", "{A3A11734-7954-48EA-B5E8-B51BF312D853}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.ParkApi", "Park.ParkApi\Park.ParkApi.csproj", "{A3A11734-7954-48EA-B5E8-B51BF312D853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.AppApi", "Park.AppApi\Park.AppApi.csproj", "{30771977-C4CB-41C0-9813-1B8913C791C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.AppApi", "Park.AppApi\Park.AppApi.csproj", "{30771977-C4CB-41C0-9813-1B8913C791C2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{BCD015EB-BB87-4A26-AD79-F55EE377AF91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.AuthApi", "Park.AuthApi\Park.AuthApi.csproj", "{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{30771977-C4CB-41C0-9813-1B8913C791C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30771977-C4CB-41C0-9813-1B8913C791C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30771977-C4CB-41C0-9813-1B8913C791C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,9 +72,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A3A11734-7954-48EA-B5E8-B51BF312D853} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 		{30771977-C4CB-41C0-9813-1B8913C791C2} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
+		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {DEBDD52B-9B43-4BED-B76D-07F9E82078C7}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {DEBDD52B-9B43-4BED-B76D-07F9E82078C7}
 	EndGlobalSection
 EndGlobal
