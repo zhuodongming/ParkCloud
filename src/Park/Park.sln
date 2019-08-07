@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.AppApi", "Park.AppApi\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{BCD015EB-BB87-4A26-AD79-F55EE377AF91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.AuthApi", "Park.AuthApi\Park.AuthApi.csproj", "{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.AuthApi", "Park.AuthApi\Park.AuthApi.csproj", "{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,7 +75,7 @@ Global
 		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {DEBDD52B-9B43-4BED-B76D-07F9E82078C7}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

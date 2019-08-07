@@ -29,7 +29,7 @@ namespace Park.ParkApi
                 options.Filters.Add<ValidateModelAttribute>(2);
             });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
 
             IocManager.Init(services);
         }
