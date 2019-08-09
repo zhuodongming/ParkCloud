@@ -1,11 +1,8 @@
-﻿using Infrastructure.DI;
-using Infrastructure.Helper;
-using Park.Dto;
+﻿using Infrastructure.Helper;
 using Park.Entity;
-using Park.Rep;
+using Park.Entity.Dto;
+using Park.Repository;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Park.App
@@ -17,7 +14,7 @@ namespace Park.App
         EnterRep _enterRep = new EnterRep();
         ExitRep _exitRep = new ExitRep();
 
-        public async Task<ExitRespDto> Exit(ExitReqDto dto)
+        public async Task<ExitOutDto> Exit(ExitInDto dto)
         {
             /* 通行证检查
              * 黑名单检查
@@ -29,7 +26,7 @@ namespace Park.App
              * 4.是否已经缴费
              */
 
-            var respDto = new ExitRespDto();
+            var respDto = new ExitOutDto();
             ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
 
             //通行证检查

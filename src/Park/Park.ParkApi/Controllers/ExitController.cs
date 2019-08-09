@@ -1,10 +1,6 @@
-﻿using Infrastructure.DI;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Park.App;
-using Park.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Park.Entity.Dto;
 using System.Threading.Tasks;
 
 namespace Park.ParkApi.Controllers
@@ -27,13 +23,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task<ExitRespDto> Post([FromBody] ExitReqDto dto)
+        public Task<ExitOutDto> Post([FromBody] ExitInDto dto)
         {
             return _exitApp.Exit(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] ExitReqDto dto)
+        public void Record([FromBody] ExitInDto dto)
         {
         }
     }

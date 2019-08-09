@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
 
-namespace Park.Rep
+namespace Park.Repository
 {
-    public class NPocoDatabase : Database
+    class NPocoDatabase : Database
     {
         public NPocoDatabase(string connectionString, DatabaseType databaseType, DbProviderFactory provider) : base(connectionString, databaseType, provider)
         {

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Infrastructure.DI;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Park.App;
-using Park.Dto;
+using Park.Entity.Dto;
+using System.Threading.Tasks;
 
 namespace Park.ParkApi.Controllers
 {
@@ -27,13 +23,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task Post([FromBody] EnterReqDto dto)
+        public Task Post([FromBody] EnterInDto dto)
         {
             return _enterApp.Enter(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] EnterReqDto dto)
+        public void Record([FromBody] EnterInDto dto)
         {
         }
     }

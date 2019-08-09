@@ -1,14 +1,15 @@
 ﻿using NPoco;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Park.Rep
+namespace Park.Repository
 {
     public abstract class BaseRepository<T> where T : class, new()
     {
-        protected NPocoDatabase db = null;
+        internal NPocoDatabase db = null;
 
         #region 增删改查
 
@@ -36,6 +37,11 @@ namespace Park.Rep
         public Task<int> DeleteAsync(T poco)
         {
             return db.DeleteAsync(poco);
+        }
+
+        public Task<int> UpdateAsync(T poco, Expression<Func<T, object>> fields)
+        {
+            return db.UpdateAsync(poco, fields);
         }
 
         public Task<int> UpdateAsync(T poco)

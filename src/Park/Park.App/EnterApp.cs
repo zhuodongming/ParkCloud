@@ -1,11 +1,8 @@
-﻿using Infrastructure.DI;
-using Infrastructure.Helper;
-using Park.Dto;
+﻿using Infrastructure.Helper;
 using Park.Entity;
-using Park.Rep;
+using Park.Entity.Dto;
+using Park.Repository;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Park.App
@@ -14,7 +11,7 @@ namespace Park.App
     {
         EnterRep _enterRep = new EnterRep();
 
-        public Task Enter(EnterReqDto dto)
+        public Task Enter(EnterInDto dto)
         {
             ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
 

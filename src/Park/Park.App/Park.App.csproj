@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Park.Service\Park.Service.csproj" />
+    <ProjectReference Include="..\Park.Repository\Park.Repository.csproj" />
   </ItemGroup>
 
 </Project>

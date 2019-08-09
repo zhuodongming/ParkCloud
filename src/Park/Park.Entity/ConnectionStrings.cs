@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Park.Entity.Base
+namespace Park.Entity
 {
     /// <summary>
     /// 连接字符串

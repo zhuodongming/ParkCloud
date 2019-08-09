@@ -1,10 +1,12 @@
-﻿using Infrastructure.DI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Park.Service
+namespace Park.App.Service
 {
+    /// <summary>
+    /// 算费服务
+    /// </summary>
     public class CalcFeeService
     {
 

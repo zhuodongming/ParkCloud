@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Park.Rep
+namespace Park.Repository
 {
-    public class BlacklistRep : BaseRepository<BlacklistEntity>
+    public class PassportRep : ParkRepository<PassportEntity>
     {
     }
 }
