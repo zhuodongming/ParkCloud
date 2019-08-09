@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.AuthApi", "Park.AuthAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.Repository", "Park.Repository\Park.Repository.csproj", "{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkPocoGen", "ParkPocoGen\ParkPocoGen.csproj", "{A571BE67-703E-469A-8129-B10C0A127039}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A571BE67-703E-469A-8129-B10C0A127039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A571BE67-703E-469A-8129-B10C0A127039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A571BE67-703E-469A-8129-B10C0A127039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A571BE67-703E-469A-8129-B10C0A127039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
