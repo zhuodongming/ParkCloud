@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace Park.ParkApi.Controllers
 {
     [Route("park/[controller]")]
+    [ApiController]
     public class EnterController : ControllerBase
     {
         EnterApp _enterApp = new EnterApp();

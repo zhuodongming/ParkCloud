@@ -15,15 +15,13 @@ namespace Park.ParkApi.Filters
         {
             var request = context.HttpContext.Request;
             StringBuilder message = new StringBuilder(4 * 1024);
-            message.Append("Unhandled exception:" + Environment.NewLine);
-            message.Append("Method: " + request.Method + Environment.NewLine);
-            message.Append("URI: " + request.Scheme + "://" + request.Host.Value + request.Path.Value + request.QueryString.Value + Environment.NewLine);
-            message.Append("Headers: " + request.Headers.ToJson() + Environment.NewLine);
-            message.Append("RouteData: " + context.RouteData.Values.ToJson() + Environment.NewLine);
-
-            using (StreamReader sr = new StreamReader(request.Body))
+            message.Append($"{request.Method} {request.Scheme}://{request.Host.Value}{request.Path.Value}{request.QueryString.Value}{Environment.NewLine}");
+            message.Append($"Authorization:{request.Headers["Authorization"]}{Environment.NewLine}");
+            message.Append($"Date:{request.Headers["Date"]}{Environment.NewLine}");
+            if (request.Body.CanSeek)
             {
-                message.Append("Body: " + await sr.ReadToEndAsync());
+                request.Body.Position = 0;
+                message.Append($"ReqBody:{await new StreamReader(request.Body).ReadToEndAsync()}");
             }
 
             Log.Error(message.ToString(), context.Exception);

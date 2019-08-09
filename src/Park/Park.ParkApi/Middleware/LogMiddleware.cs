@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,41 +10,62 @@ using System.Threading.Tasks;
 
 namespace Park.ParkApi.Middleware
 {
-    /// <summary>
-    /// 日志中间件
-    /// </summary>
     public class LogMiddleware
     {
         private readonly RequestDelegate _next;
+        public LogMiddleware(RequestDelegate next) => _next = next;
 
-        public LogMiddleware(RequestDelegate next)
+        public async Task Invoke(HttpContext context)
         {
-            this._next = next;
-        }
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            Exception _ex = null;
 
-        public async Task Invoke(HttpContext httpContext)
-        {
-            await _next(httpContext);
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                _ex = ex;
+            }
 
-            await LogRequest(httpContext);//记录日志
+            stopwatch.Stop();
+            await LogData(context, stopwatch.ElapsedMilliseconds, _ex);//记录日志
         }
 
         //记录日志
-        public async Task LogRequest(HttpContext httpContext)
+        public async Task LogData(HttpContext context, long elapsedMilliseconds, Exception ex)
         {
-            var request = httpContext.Request;
-            StringBuilder message = new StringBuilder(4 * 1024);
-            message.Append("Method: " + request.Method + Environment.NewLine);
-            message.Append("URI: " + request.Scheme + "://" + request.Host.Value + request.Path.Value + request.QueryString.Value + Environment.NewLine);
-            message.Append("Headers: " + request.Headers.ToJson() + Environment.NewLine);
-            message.Append("RouteData: " + httpContext.Request.Path.ToJson() + Environment.NewLine);
-
-            using (StreamReader sr = new StreamReader(request.Body))
+            var request = context.Request;
+            StringBuilder message = new StringBuilder(10 * 1024);
+            message.Append($"ExecTime:{elapsedMilliseconds}ms{Environment.NewLine}");
+            message.Append($"{request.Method} {request.Scheme}://{request.Host.Value}{request.Path.Value}{request.QueryString.Value}{Environment.NewLine}");
+            message.Append($"Authorization:{request.Headers["Authorization"]}{Environment.NewLine}");
+            message.Append($"Date:{request.Headers["Date"]}{Environment.NewLine}");
+            if (request.Body.CanSeek)
             {
-                message.Append("Body: " + await sr.ReadToEndAsync());
+                request.Body.Position = 0;
+                message.Append($"ReqBody:{await new StreamReader(request.Body).ReadToEndAsync()}{Environment.NewLine}");
             }
 
-            Log.Info(message.ToString());
+            var response = context.Response;
+            message.Append($"StatusCode:{response.StatusCode}{Environment.NewLine}");
+            if (response.Body.CanRead)
+            {
+                response.Body.Position = 0;
+                message.Append($"RespBody:{await new StreamReader(response.Body).ReadToEndAsync()}{Environment.NewLine}");
+            }
+
+            string log = message.ToString();//日志
+
+            if (ex == null)
+            {
+                Log.Info(log);
+            }
+            else
+            {
+                Log.Error(log, ex);
+            }
         }
     }
 }

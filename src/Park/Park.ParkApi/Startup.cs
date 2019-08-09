@@ -24,9 +24,7 @@ namespace Park.ParkApi
         {
             services.AddControllers(options =>
             {
-                options.Filters.Add<ExceptionHandlerFilterAttribute>(1);
-                options.Filters.Add<AuthorizationAttribute>(1);
-                options.Filters.Add<ValidateModelAttribute>(2);
+                options.Filters.Add<AuthorizationFilter>(1);
             });
 
             services.AddHttpContextAccessor();
@@ -47,9 +45,9 @@ namespace Park.ParkApi
             app.UseAuthorization();
 
             //app.UseWebSockets();
+            //app.UseMiddleware<ChannelMiddleware>();//通道中间件
 
-            //app.UseMiddleware<ChannelWSMiddleware>();//通道中间件
-            app.UseMiddleware<ProfileMiddleware>();//性能中间件
+            app.UseMiddleware<HttpContextBodyBufferingMiddleware>();//设置Request/Response.Body可重复读取
             app.UseMiddleware<LogMiddleware>();//日志中间件
 
             app.UseEndpoints(endpoints =>

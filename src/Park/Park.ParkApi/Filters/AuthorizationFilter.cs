@@ -10,14 +10,8 @@ using System.Threading.Tasks;
 
 namespace Park.ParkApi.Filters
 {
-    public class AuthorizationAttribute : IAsyncAuthorizationFilter
+    public class AuthorizationFilter : IAsyncAuthorizationFilter
     {
-        private readonly ParkRep _parkRep;
-        public AuthorizationAttribute(ParkRep parkRep)
-        {
-            _parkRep = parkRep;
-        }
-
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             var request = context.HttpContext.Request;
@@ -25,16 +19,12 @@ namespace Park.ParkApi.Filters
             string method = request.Method;
             string rawUrl = request.Path.Value + request.QueryString.Value;
             string date = request.Headers["Date"];
-
-            string content = String.Empty;
-            using (MemoryStream stream = new MemoryStream())
+            string content = null;
+            if (request.Body.CanSeek)
             {
                 request.Body.Position = 0;
-                await request.Body.CopyToAsync(stream);
+                content = await new StreamReader(request.Body).ReadToEndAsync();
                 request.Body.Position = 0;
-
-                stream.Position = 0;
-                content = await new StreamReader(stream).ReadToEndAsync();
             }
 
             if (AuthenticationHeaderValue.TryParse(request.Headers["Authorization"], out AuthenticationHeaderValue authorization))
@@ -44,13 +34,14 @@ namespace Park.ParkApi.Filters
                     string[] split = authorization.Parameter.Split(':');
                     string parkID = split[0];
                     string sign = split[1];
-                    ParkEntity parkEntity = await _parkRep.SingleOrDefaultByIdAsync(parkID);
+                    var parkEntity = await new ParkRep().SingleOrDefaultByIdAsync(parkID);
                     if (parkEntity != null)
                     {
                         string preString = method + "\n"
                                             + rawUrl + "\n"
-                                            + content + "\n"
-                                            + date + "\n";
+                                            + date + "\n"
+                                            + content + "\n";
+
                         string sha1 = Crypto.GetHMACSHA1(preString, parkEntity.park_key);
                         if (String.Equals(sign, sha1, StringComparison.CurrentCultureIgnoreCase))
                         {
