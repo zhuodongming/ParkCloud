@@ -1,12 +1,12 @@
 ﻿using Infrastructure.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Park.ParkApi.Filters;
-using Park.ParkApi.Middleware;
+using Park.Entity;
+using Park.UI.Filter;
+using Park.UI.Middleware;
 
 namespace Park.ParkApi
 {
@@ -25,9 +25,13 @@ namespace Park.ParkApi
             services.AddControllers(options =>
             {
                 options.Filters.Add<AuthorizationFilter>(1);
-            });
+            })
+            .AddNewtonsoftJson();
 
             services.AddHttpContextAccessor();
+
+            //配置Settings
+            Configuration.LoadSettings<ConnectionStrings>();
 
             IocManager.Init(services);
         }

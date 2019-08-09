@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Park.App\Park.App.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview7.19365.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Park.UI\Park.UI.csproj" />
   </ItemGroup>
 
 </Project>

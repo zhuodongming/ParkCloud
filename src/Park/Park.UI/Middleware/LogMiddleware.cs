@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Park.ParkApi.Middleware
+namespace Park.UI.Middleware
 {
     public class LogMiddleware
     {

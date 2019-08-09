@@ -8,7 +8,7 @@ using System.IO;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace Park.ParkApi.Filters
+namespace Park.UI.Filter
 {
     public class AuthorizationFilter : IAsyncAuthorizationFilter
     {

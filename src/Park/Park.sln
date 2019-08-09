@@ -17,9 +17,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Present
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.AuthApi", "Park.AuthApi\Park.AuthApi.csproj", "{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.Repository", "Park.Repository\Park.Repository.csproj", "{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Park.Repository", "Park.Repository\Park.Repository.csproj", "{5B3CCBFF-2DEF-4FB6-A5BE-ADD32EFE0EF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkPocoGen", "ParkPocoGen\ParkPocoGen.csproj", "{A571BE67-703E-469A-8129-B10C0A127039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Park.UI", "Park.UI\Park.UI.csproj", "{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{A571BE67-703E-469A-8129-B10C0A127039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A571BE67-703E-469A-8129-B10C0A127039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A571BE67-703E-469A-8129-B10C0A127039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,9 +73,10 @@ Global
 		{A3A11734-7954-48EA-B5E8-B51BF312D853} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 		{30771977-C4CB-41C0-9813-1B8913C791C2} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 		{70A979E5-50D8-4FE1-B8D1-9915BB5E6DD7} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
+		{FF2D5144-9E55-4757-B5A7-9A5E7EDF4079} = {BCD015EB-BB87-4A26-AD79-F55EE377AF91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VisualSVNWorkingCopyRoot = .
 		SolutionGuid = {DEBDD52B-9B43-4BED-B76D-07F9E82078C7}
+		VisualSVNWorkingCopyRoot = .
 	EndGlobalSection
 EndGlobal

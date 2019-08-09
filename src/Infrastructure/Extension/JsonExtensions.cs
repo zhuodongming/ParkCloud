@@ -1,6 +1,7 @@
 ﻿using Infrastructure.Helper;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
 
 namespace System
 {
@@ -16,7 +17,8 @@ namespace System
         /// <returns></returns>
         public static string ToJson(this object obj)
         {
-            return JsonSerializer.Serialize(obj);
+            return JsonConvert.SerializeObject(obj);
+            //return JsonSerializer.Serialize(obj);
         }
 
         /// <summary>
@@ -29,7 +31,8 @@ namespace System
         {
             try
             {
-                return JsonSerializer.Deserialize<T>(json);
+                return JsonConvert.DeserializeObject<T>(json);
+                //return JsonSerializer.Deserialize<T>(json);
             }
             catch
             {

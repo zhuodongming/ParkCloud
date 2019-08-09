@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Park.ParkApi.Filters
+namespace Park.UI.Filter
 {
     public class ExceptionHandlerFilterAttribute : ExceptionFilterAttribute
     {

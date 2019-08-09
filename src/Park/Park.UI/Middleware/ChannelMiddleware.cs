@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 
-namespace Park.ParkApi.Middleware
+namespace Park.UI.Middleware
 {
     public class ChannelMiddleware
     {
