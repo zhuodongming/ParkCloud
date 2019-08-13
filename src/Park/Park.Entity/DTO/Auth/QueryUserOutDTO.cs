@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Park.Entity.DTO
+namespace Park.Entity.DTO.Auth
 {
-    public class EnterOutDTO
+    public class QueryUserOutDTO
     {
     }
 }

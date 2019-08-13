@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Park.App;
-using Park.Entity.Dto;
+using Park.Entity.DTO;
 using System.Threading.Tasks;
 
 namespace Park.ParkApi.Controllers
@@ -24,13 +24,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task<ExitOutDto> Post([FromBody] ExitInDto dto)
+        public Task<ExitOutDTO> Post([FromBody] ExitInDTO dto)
         {
             return _exitApp.Exit(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] ExitInDto dto)
+        public void Record([FromBody] ExitInDTO dto)
         {
         }
     }

@@ -34,18 +34,18 @@ namespace Park.UI.Filter
                     string[] split = authorization.Parameter.Split(':');
                     string parkID = split[0];
                     string sign = split[1];
-                    var parkEntity = await new ParkRep().SingleOrDefaultByIdAsync(parkID);
-                    if (parkEntity != null)
+                    var parkPO = await new ParkRep<parkPO>().SingleOrDefaultByIdAsync(parkID);
+                    if (parkPO != null)
                     {
                         string preString = method + "\n"
                                             + rawUrl + "\n"
                                             + date + "\n"
                                             + content + "\n";
 
-                        string sha1 = Crypto.GetHMACSHA1(preString, parkEntity.park_key);
+                        string sha1 = Crypto.GetHMACSHA1(preString, parkPO.park_key);
                         if (String.Equals(sign, sha1, StringComparison.CurrentCultureIgnoreCase))
                         {
-                            context.HttpContext.Items.Add("ParkUser", parkEntity);
+                            context.HttpContext.Items.Add("ParkUser", parkPO);
                             return;
                         }
                         else

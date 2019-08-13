@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Park.App;
-using Park.Entity.Dto;
+using Park.Entity.DTO;
 using System.Threading.Tasks;
 
 namespace Park.ParkApi.Controllers
@@ -24,13 +24,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task Post([FromBody] EnterInDto dto)
+        public Task Post([FromBody] EnterInDTO dto)
         {
             return _enterApp.Enter(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] EnterInDto dto)
+        public void Record([FromBody] EnterInDTO dto)
         {
         }
     }

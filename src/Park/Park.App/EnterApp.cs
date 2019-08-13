@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Helper;
 using Park.Entity;
-using Park.Entity.Dto;
+using Park.Entity.DTO;
 using Park.Repository;
 using System;
 using System.Threading.Tasks;
@@ -9,18 +9,16 @@ namespace Park.App
 {
     public class EnterApp
     {
-        EnterRep _enterRep = new EnterRep();
-
-        public Task Enter(EnterInDto dto)
+        public Task Enter(EnterInDTO dto)
         {
-            ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
+            var parkPO = (parkPO)HttpContextEx.Current.Items["ParkUser"];
 
-            var entity = new EnterEntity
+            var entity = new enterPO
             {
                 id = new IdWorker(1, 1).NextId(),
                 req_id = dto.ReqID,
-                park_id = parkEntity.park_id,
-                park_name = parkEntity.park_name,
+                park_id = parkPO.park_id,
+                park_name = parkPO.park_name,
                 plate_no = dto.PlateNo,
                 plate_color = dto.PlateColor,
                 enter_time = DateTime.Now,
@@ -31,7 +29,7 @@ namespace Park.App
                 create_ip = "",
                 create_time = DateTime.Now,
             };
-            return _enterRep.InsertAsync(entity);
+            return new ParkRep<enterPO>().InsertAsync(entity);
         }
     }
 }

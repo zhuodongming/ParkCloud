@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Helper;
 using Park.Entity;
-using Park.Entity.Dto;
+using Park.Entity.DTO;
 using Park.Repository;
 using System;
 using System.Threading.Tasks;
@@ -9,12 +9,12 @@ namespace Park.App
 {
     public class ExitApp
     {
-        BlacklistRep _blacklistRep = new BlacklistRep();
-        PassportRep _passportRep = new PassportRep();
-        EnterRep _enterRep = new EnterRep();
-        ExitRep _exitRep = new ExitRep();
+        ParkRep<blacklistPO> _blacklistRep = new ParkRep<blacklistPO>();
+        ParkRep<passportPO> _passportRep = new ParkRep<passportPO>();
+        ParkRep<enterPO> _enterRep = new ParkRep<enterPO>();
+        ParkRep<leavePO> _exitRep = new ParkRep<leavePO>();
 
-        public async Task<ExitOutDto> Exit(ExitInDto dto)
+        public async Task<ExitOutDTO> Exit(ExitInDTO dto)
         {
             /* 通行证检查
              * 黑名单检查
@@ -26,52 +26,52 @@ namespace Park.App
              * 4.是否已经缴费
              */
 
-            var respDto = new ExitOutDto();
-            ParkEntity parkEntity = (ParkEntity)HttpContextEx.Current.Items["ParkUser"];
+            var respDTO = new ExitOutDTO();
+            parkPO parkEntity = (parkPO)HttpContextEx.Current.Items["ParkUser"];
 
             //通行证检查
-            PassportEntity passportEntity = await _passportRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            passportPO passportEntity = await _passportRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
             if (passportEntity != null)
             {
                 DateTime now = DateTime.Now;
                 if (passportEntity.effective_time < now && now < passportEntity.expiry_time)
                 {
-                    respDto.IsPassport = true;
-                    respDto.EffectiveTime = passportEntity.effective_time;
-                    respDto.ExpiryTime = passportEntity.expiry_time;
-                    return respDto;
+                    respDTO.IsPassport = true;
+                    respDTO.EffectiveTime = passportEntity.effective_time;
+                    respDTO.ExpiryTime = passportEntity.expiry_time;
+                    return respDTO;
                 }
             }
 
             //黑名单检查
-            BlacklistEntity blacklistEntity = await _blacklistRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
-            if (blacklistEntity != null)
+            var blacklistPO = await _blacklistRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            if (blacklistPO != null)
             {
                 DateTime now = DateTime.Now;
-                if (blacklistEntity.effective_time < now && now < blacklistEntity.expiry_time)
+                if (blacklistPO.effective_time < now && now < blacklistPO.expiry_time)
                 {
-                    respDto.IsBlacklist = true;
-                    respDto.EffectiveTime = blacklistEntity.effective_time;
-                    respDto.ExpiryTime = blacklistEntity.expiry_time;
-                    return respDto;
+                    respDTO.IsBlacklist = true;
+                    respDTO.EffectiveTime = blacklistPO.effective_time;
+                    respDTO.ExpiryTime = blacklistPO.expiry_time;
+                    return respDTO;
                 }
             }
 
-            EnterEntity enterEntity = await _enterRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
-            if (enterEntity != null)
+            var enterPO = await _enterRep.FirstOrDefaultAsync($"where park_id='{parkEntity.park_id}' and plate_no='{dto.PlateNo}'");
+            if (enterPO != null)
             {
                 //算费服务
-                var exitEntity = new ExitEntity
+                var leavePO = new leavePO
                 {
                     id = new IdWorker(1, 1).NextId(),
                     req_id = dto.ReqID,
-                    park_id = enterEntity.park_id,
-                    park_name = enterEntity.park_name,
+                    park_id = enterPO.park_id,
+                    park_name = enterPO.park_name,
                     plate_no = dto.PlateNo,
                     plate_color = dto.PlateColor,
-                    enter_time = enterEntity.enter_time,
-                    enter_no = enterEntity.enter_no,
-                    exit_time = DateTime.Now,
+                    enter_time = enterPO.enter_time,
+                    enter_no = enterPO.enter_no,
+                    leave_time = DateTime.Now,
                     exit_no = dto.ExitNo,
                     parking_time = 10,
                     receivable = 0,
@@ -83,7 +83,7 @@ namespace Park.App
                     create_ip = "",
                     create_time = DateTime.Now,
                 };
-                await _exitRep.InsertAsync(exitEntity);
+                await _exitRep.InsertAsync(leavePO);
             }
 
             return null;

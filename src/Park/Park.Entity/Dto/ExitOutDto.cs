@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Park.Entity.Dto
+namespace Park.Entity.DTO
 {
-    public class ExitOutDto
+    public class ExitOutDTO
     {
         public string PlateNo { get; set; }//车牌号码
         public string PlateColor { get; set; }//车牌颜色
