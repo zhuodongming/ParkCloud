@@ -7,10 +7,8 @@ namespace Park.ParkApi.Controllers
 {
     [Route("park/[controller]")]
     [ApiController]
-    public class EnterController : ControllerBase
+    public class EntryController : ControllerBase
     {
-        EnterApp _enterApp = new EnterApp();
-
         [HttpGet]
         public void Get()
         {
@@ -24,13 +22,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task Post([FromBody] EnterInDTO dto)
+        public Task Post([FromBody] EntryInDTO dto)
         {
-            return _enterApp.Enter(dto);
+            return new EntryApp().Enter(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] EnterInDTO dto)
+        public void Record([FromBody] EntryInDTO dto)
         {
         }
     }

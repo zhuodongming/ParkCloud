@@ -15,9 +15,7 @@ namespace Park.Repository
         public bool status { get; set; }//状态 0:禁用，1:启用
         public string remark { get; set; }//备注
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
     [TableName("blacklist")]
@@ -35,14 +33,12 @@ namespace Park.Repository
         public bool status { get; set; }//状态 0:禁用，1:启用
         public string remark { get; set; }//备注
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
-    [TableName("enter")]
+    [TableName("entry")]
     [PrimaryKey("id", AutoIncrement = false)]
-    public class enterPO
+    public class entryPO
     {
         public long id { get; set; }//id
         public string req_id { get; set; }//请求id
@@ -50,15 +46,13 @@ namespace Park.Repository
         public string park_name { get; set; }//车场名称
         public string plate_no { get; set; }//车牌号码
         public string plate_color { get; set; }//车牌颜色
-        public DateTime enter_time { get; set; }//入场时间
-        public string enter_no { get; set; }//入口编号
+        public DateTime entry_time { get; set; }//入场时间
+        public string entry_no { get; set; }//入口编号
         public sbyte vehicle_type { get; set; }//车辆类型
         public sbyte pass_mode { get; set; }//通行方式
         public string pic_url { get; set; }//图片url
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
     [TableName("leave")]
@@ -71,8 +65,8 @@ namespace Park.Repository
         public string park_name { get; set; }//车场名称
         public string plate_no { get; set; }//车牌号码
         public string plate_color { get; set; }//车牌颜色
-        public DateTime enter_time { get; set; }//入场时间
-        public string enter_no { get; set; }//入口编号
+        public DateTime entry_time { get; set; }//入场时间
+        public string entry_no { get; set; }//入口编号
         public DateTime? leave_time { get; set; }//离场时间
         public string exit_no { get; set; }//出口编号
         public int? parking_time { get; set; }//停车时长 单位:分钟
@@ -83,9 +77,7 @@ namespace Park.Repository
         public sbyte pass_mode { get; set; }//通行方式
         public string pic_url { get; set; }//图片url
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
     [TableName("park")]
@@ -98,9 +90,7 @@ namespace Park.Repository
         public bool status { get; set; }//状态 0:禁用，1:启用
         public string remark { get; set; }//备注
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
     [TableName("passport")]
@@ -118,9 +108,7 @@ namespace Park.Repository
         public bool status { get; set; }//状态 0:禁用，1:启用
         public string remark { get; set; }//备注
         public DateTime create_time { get; set; }//
-        public string create_ip { get; set; }//
         public DateTime? modify_time { get; set; }//
-        public string modify_ip { get; set; }//
     }
 
 }

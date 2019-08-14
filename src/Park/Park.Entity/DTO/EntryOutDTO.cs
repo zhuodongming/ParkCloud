@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Park.Entity.DTO
 {
-    public class EnterOutDTO
+    public class EntryOutDTO
     {
     }
 }

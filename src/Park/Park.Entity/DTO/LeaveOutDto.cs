@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Park.Entity.DTO
 {
-    public class ExitOutDTO
+    public class LeaveOutDto
     {
         public string PlateNo { get; set; }//车牌号码
         public string PlateColor { get; set; }//车牌颜色

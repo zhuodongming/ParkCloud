@@ -7,10 +7,8 @@ namespace Park.ParkApi.Controllers
 {
     [Route("park/[controller]")]
     [ApiController]
-    public class ExitController : ControllerBase
+    public class LeaveController : ControllerBase
     {
-        ExitApp _exitApp = new ExitApp();
-
         [HttpGet]
         public void Get()
         {
@@ -24,13 +22,13 @@ namespace Park.ParkApi.Controllers
         }
 
         [HttpPost]
-        public Task<ExitOutDTO> Post([FromBody] ExitInDTO dto)
+        public Task<LeaveOutDto> Post([FromBody] LeaveInDTO dto)
         {
-            return _exitApp.Exit(dto);
+            return new LeaveApp().Exit(dto);
         }
 
         [HttpPost]
-        public void Record([FromBody] ExitInDTO dto)
+        public void Record([FromBody] LeaveInDTO dto)
         {
         }
     }
