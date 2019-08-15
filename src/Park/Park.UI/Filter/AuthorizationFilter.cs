@@ -1,11 +1,14 @@
 ﻿using Infrastructure.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Park.Entity;
 using Park.Repository;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Park.UI.Filter
@@ -14,6 +17,15 @@ namespace Park.UI.Filter
     {
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
+            var description = (ControllerActionDescriptor)context.ActionDescriptor;
+
+            //匿名标识
+            var allowAnonymous = description.MethodInfo.GetCustomAttribute(typeof(AllowAnonymousAttribute));
+            if (allowAnonymous != null)
+            {
+                return;
+            }
+
             var request = context.HttpContext.Request;
 
             string method = request.Method;
