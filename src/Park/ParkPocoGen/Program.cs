@@ -10,11 +10,11 @@ namespace ParkPocoGen
         static void Main(string[] args)
         {
             //Park
-            string strPKCConn = "Database=park;Data Source=120.25.215.63;User Id=root;Password=abcd*1234;charset=utf8;SslMode=none;allowPublicKeyRetrieval=true;";
+            string strPKCConn = "Database=park;Data Source=127.0.0.1;User Id=root;Password=root;charset=utf8;SslMode=none;allowPublicKeyRetrieval=true;";
             MySqlConnection pkcConn = new MySqlConnection(strPKCConn);
             PocoGenClient client = new PocoGenClient(options =>
              {
-                 options.IsGenNPoco = true;
+                 options.IsGenPetaPoco = true;
                  options.Namespace = "Park.Repository";
                  options.ClassSuffix = "PO";
              });
