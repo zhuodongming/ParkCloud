@@ -1,5 +1,5 @@
 using System;
-using NPoco;
+using PetaPoco;
 
 namespace Park.Repository
 {

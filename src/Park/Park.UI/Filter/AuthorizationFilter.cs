@@ -46,7 +46,7 @@ namespace Park.UI.Filter
                     string[] split = authorization.Parameter.Split(':');
                     string parkID = split[0];
                     string sign = split[1];
-                    var parkPO = await new ParkRep<parkPO>().SingleOrDefaultByIdAsync(parkID);
+                    var parkPO = await new ParkRep<parkPO>().SingleOrDefaultAsync(parkID);
                     if (parkPO != null)
                     {
                         string preString = method + "\n"

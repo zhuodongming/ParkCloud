@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using NPoco;
 using Park.Entity;
+using PetaPoco;
 
 namespace Park.Repository
 {
@@ -8,7 +8,7 @@ namespace Park.Repository
     {
         public ParkRep()
         {
-            db = new NPocoDatabase(ConnectionStrings.Park, DatabaseType.MySQL, MySqlClientFactory.Instance);
+            db = new Database(ConnectionStrings.Park, MySqlClientFactory.Instance);
         }
     }
 }

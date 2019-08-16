@@ -1,4 +1,4 @@
-﻿using NPoco;
+﻿using PetaPoco;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,29 +9,13 @@ namespace Park.Repository
 {
     public abstract class BaseRepository<T> where T : class, new()
     {
-        internal NPocoDatabase db = null;
+        internal Database db = null;
 
         #region 增删改查
 
         public Task<object> InsertAsync(T poco)
         {
             return db.InsertAsync(poco);
-        }
-
-        public Task InsertBatchAsync(IEnumerable<T> pocos)
-        {
-            return Task.Run(() =>
-            {
-                db.InsertBatch(pocos, new BatchOptions() { BatchSize = 100 });
-            });
-        }
-
-        public Task InsertBulkAsync(IEnumerable<T> pocos)
-        {
-            return Task.Run(() =>
-            {
-                db.InsertBulk(pocos);
-            });
         }
 
         public Task<int> DeleteAsync(T poco)
@@ -59,9 +43,9 @@ namespace Park.Repository
             return db.FirstOrDefaultAsync<T>(sql, args);
         }
 
-        public Task<T> SingleOrDefaultByIdAsync(object primaryKey)
+        public Task<T> SingleOrDefaultAsync(object primaryKey)
         {
-            return db.SingleOrDefaultByIdAsync<T>(primaryKey);
+            return db.SingleOrDefaultAsync<T>(primaryKey);
         }
 
         public Task<List<T>> FetchAsync()

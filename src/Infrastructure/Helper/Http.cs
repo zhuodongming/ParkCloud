@@ -16,12 +16,18 @@ namespace Infrastructure.Helper
     /// </summary>
     public sealed class Http
     {
-        private static readonly HttpClientHandler hander = new HttpClientHandler()
+        private static readonly HttpClient httpClient = null;
+        static Http()
         {
-            UseProxy = false,//禁用代理
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
-            ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,//设置访问https url
-        };
+            HttpClientHandler hander = new HttpClientHandler()
+            {
+                UseProxy = false,//禁用代理
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,//启用响应内容压缩
+                ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true,//设置访问https url
+            };
+            httpClient = new HttpClient(hander);
+            //httpClient.Timeout = TimeSpan.FromSeconds(10);//超时设置
+        }
 
         public async static Task<string> GetStringAsync(string url, IDictionary<string, string> headers = null)
         {
@@ -33,7 +39,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
@@ -51,7 +57,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsByteArrayAsync();
@@ -71,7 +77,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
@@ -91,7 +97,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
@@ -111,7 +117,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsByteArrayAsync();
@@ -144,7 +150,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
@@ -164,7 +170,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();
@@ -182,7 +188,7 @@ namespace Infrastructure.Helper
                     request.Headers.Add(item.Key, item.Value);
                 });
 
-                using (HttpResponseMessage response = await HttpClientFactory.Create(hander).SendAsync(request))
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     response.EnsureSuccessStatusCode();
                     return await response.Content.ReadAsStringAsync();

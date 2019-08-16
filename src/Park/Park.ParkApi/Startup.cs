@@ -25,8 +25,7 @@ namespace Park.ParkApi
             services.AddControllers(options =>
             {
                 options.Filters.Add<AuthorizationFilter>(1);
-            })
-            .AddNewtonsoftJson();
+            });
 
             services.AddHttpContextAccessor();
 
